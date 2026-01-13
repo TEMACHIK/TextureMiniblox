@@ -142,7 +142,7 @@ this.nameTag.visible = (tagsWhileSneaking[1] || !this.entity.sneak)
 				});
 				return;
 			}
-			fetch(\`\${SERVICES_SEND_ENDPOINT}?author=\${name}&platformID=impact:client\`, {
+			fetch(\`\${SERVICES_SEND_ENDPOINT}?author=\${name}&platformID=Balance:client\`, {
 				method: "POST",
 				body: message
 			}).then(async r => {
@@ -334,7 +334,7 @@ this.nameTag.visible = (tagsWhileSneaking[1] || !this.entity.sneak)
 	addModification('skinManager.loadTextures(),', ',this.loadVape(),');
 	addModification('async loadSpritesheet(){', `
 		async loadVape() {
-			this.vapeTexture = await this.loader.loadAsync("https://raw.githubusercontent.com/ProgMEM-CC/miniblox.impact.client.updatedv2/refs/heads/main/favicon.png");
+			this.vapeTexture = await this.loader.loadAsync("https://raw.githubusercontent.com/ProgMEM-CC/miniblox.Balance.client.updatedv2/refs/heads/main/favicon.png");
 		}
 		async loadSpritesheet(){
 	`, true);
@@ -1077,7 +1077,7 @@ clientVersion: VERSION$1
 			case ".report": {
 				if (typeof globalThis.${storeName} === "undefined") globalThis.${storeName} = {};
 				globalThis.${storeName}.openReportModal = function() {
-					const GITHUB_REPO = "progmem-cc/miniblox.impact.client.updatedv2";
+					const GITHUB_REPO = "progmem-cc/miniblox.Balance.client.updatedv2";
 					
 					// Exit pointer lock when opening modal
 					if (document.pointerLockElement) {
@@ -1275,7 +1275,7 @@ clientVersion: VERSION$1
 						const versionInfo = \`\\n\\n---\\n**Version:** \${VERSION}\\n**User Agent:** \${navigator.userAgent}\`;
 						const fullBody = body + versionInfo;
 						
-						const url = \`https://github.com/ProgMEM-CC/miniblox.impact.client.updatedv2/issues/new?labels=\${label}&title=\${encodeURIComponent(fullTitle)}&body=\${encodeURIComponent(fullBody)}\`;
+						const url = \`https://github.com/ProgMEM-CC/miniblox.Balance.client.updatedv2/issues/new?labels=\${label}&title=\${encodeURIComponent(fullTitle)}&body=\${encodeURIComponent(fullBody)}\`;
 						
 						window.open(url, "_blank");
 						modal.remove();
@@ -1633,12 +1633,12 @@ clientVersion: VERSION$1
 					code: data.code,
 					source: data.source
 				}));
-				localStorage.setItem("impact_custom_scripts", JSON.stringify(scriptsData));
+				localStorage.setItem("Balance_custom_scripts", JSON.stringify(scriptsData));
 			}
 			
 			function loadCustomScripts() {
 				try {
-					const saved = localStorage.getItem("impact_custom_scripts");
+					const saved = localStorage.getItem("Balance_custom_scripts");
 					if (saved) {
 						const scriptsData = JSON.parse(saved);
 						scriptsData.forEach(script => {
@@ -1729,26 +1729,26 @@ clientVersion: VERSION$1
 			let ircSource;
 			let systemMessageColor;
 			// maps an IRC PlatformID to a "readable" name,
-			// e.g. "impact:discord" is a protected platform ID (requires auth) used by our discord
+			// e.g. "Balance:discord" is a protected platform ID (requires auth) used by our discord
 			// bot to mirror messages over
-			// "impact:client", however, isn't protected,
+			// "Balance:client", however, isn't protected,
 			// since this is a public client and
 			// we have no way of being able to trust the client without this e.g. being possible to emulate the client.
-			const PID_REG = "https://raw.githubusercontent.com/Impact-IMChat/platform-id-registry/refs/heads/main/registry.json";
+			const PID_REG = "https://raw.githubusercontent.com/Balance-IMChat/platform-id-registry/refs/heads/main/registry.json";
 			const PLATFORM_ID_TO_READABLE = await fetch(PID_REG).then(r => r.json());
 			/** @param {MessageEvent} e */
 			function onIRCMessage(e) {
 				const { message, author, platformID } = JSON.parse(e.data);
 				if (author === null && platformID === undefined) {
 					game.chat.addChat({
-						text: \`[Impact] IRC server: \${message}\`,
+						text: \`[Balance] IRC server: \${message}\`,
 						color: systemMessageColor[1]
 					});
 					return;
 				}
 				const readable = PLATFORM_ID_TO_READABLE[platformID] ?? platformID;
 				game.chat.addChat({
-					text: \`[Impact IRC] \${author} via \${readable}: \${message}\`
+					text: \`[Balance IRC] \${author} via \${readable}: \${message}\`
 				});
 			}
 			function startIRC() {
@@ -1758,7 +1758,7 @@ clientVersion: VERSION$1
 				ircSource.addEventListener("message", onIRCMessage);
 				ircSource.addEventListener("error", e => {
 					game.chat.addChat({
-						text: "[Impact] Error while connecting to IMChat / IRC, see console! (reconnecting in 3s)",
+						text: "[Balance] Error while connecting to IMChat / IRC, see console! (reconnecting in 3s)",
 					});
 					console.error(e);
 					stopIRC();
@@ -2374,7 +2374,7 @@ speedauto = speed.addoption("AutoJump", Boolean, true);
 			// 	}
 			// }
 
-			// liquidGlassWaitPromise = import("https://raw.githack.com/ProgMEM-CC/miniblox.impact.client.updatedv2/refs/heads/dynamic-island/liquidGlass.js").then(mod => {
+			// liquidGlassWaitPromise = import("https://raw.githack.com/ProgMEM-CC/miniblox.Balance.client.updatedv2/refs/heads/dynamic-island/liquidGlass.js").then(mod => {
 			// 	lGlass = mod;
 			// 	return lGlass;
 			// });
@@ -2471,9 +2471,9 @@ speedauto = speed.addoption("AutoJump", Boolean, true);
 								height: 47,
 								elements: [
 									// Logo
-									{ type: "image", src: "https://github.com/ProgMEM-CC/miniblox.impact.client.updatedv2/blob/main/logo.png?raw=true", x: logoX, y: 0, width: 22, height: 22 },
-									// Impact V6
-									{ type: "text", content: "Impact V6", x: 0, y: 0, color: "#fff", size: 13, bold: true },
+									{ type: "image", src: "https://github.com/ProgMEM-CC/miniblox.Balance.client.updatedv2/blob/main/logo.png?raw=true", x: logoX, y: 0, width: 22, height: 22 },
+									// Balance V6
+									{ type: "text", content: "Balance V6", x: 0, y: 0, color: "#fff", size: 13, bold: true },
 									{ type: "text", content: fpsLbl, x: perfX, y: -4, color: "#0FB3A0", size: 18 },
 									{ type: "text", content: pingLbl, x: perfX, y: 12, color: "#0FB3A0", size: 12 },
 									// Session time 
@@ -2494,8 +2494,8 @@ speedauto = speed.addoption("AutoJump", Boolean, true);
 								height: 32,
 								elements: [
 									// Logo
-									{ type: "image", src: "https://github.com/ProgMEM-CC/miniblox.impact.client.updatedv2/blob/main/logo.png?raw=true", x: logoX, y: 0, width: 22, height: 22 },
-									{ type: "text", content: "Impact V6", x: 0, y: 0, color: "#fff", size: 13, bold: true },
+									{ type: "image", src: "https://github.com/ProgMEM-CC/miniblox.Balance.client.updatedv2/blob/main/logo.png?raw=true", x: logoX, y: 0, width: 22, height: 22 },
+									{ type: "text", content: "Balance V6", x: 0, y: 0, color: "#fff", size: 13, bold: true },
 									{ type: "text", content: timeStr, x: timeX, y: 0, color: "#ffd700", size: 11, bold: true }
 								]
 							};
@@ -4647,7 +4647,7 @@ const survival = new Module("SurvivalMode", function(callback) {
 
 		// === Create Category Panel ===
 		function createCategoryPanel() {
-			const { panel, content } = createPanel("Impact V8", 40, 40, 220);
+			const { panel, content } = createPanel("Balance V8", 40, 40, 220);
 			const baseCategories = ["Combat", "Movement", "Player", "Render", "World","Client","Minigames", "Misc","Exploit","Broken","Music"];
 			const categories = [...baseCategories];
 
@@ -5876,6 +5876,6 @@ function createModuleRow(name, mod, content) {
 		}, true); // Use capture phase to run before other listeners
 
 		// === Startup notification ===
-		setTimeout(() => { showNotif("Press \\\\ to open Impact V8 ClickGUI!", "info", 4000); }, 500);
+		setTimeout(() => { showNotif("Press \\\\ to open Balance V8 ClickGUI!", "info", 4000); }, 500);
 	}
 })();
