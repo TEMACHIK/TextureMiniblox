@@ -334,7 +334,7 @@ this.nameTag.visible = (tagsWhileSneaking[1] || !this.entity.sneak)
 	addModification('skinManager.loadTextures(),', ',this.loadVape(),');
 	addModification('async loadSpritesheet(){', `
 		async loadVape() {
-			this.vapeTexture = await this.loader.loadAsync("https://raw.githubusercontent.com/ProgMEM-CC/miniblox.Balance.client.updatedv2/refs/heads/main/favicon.png");
+			this.vapeTexture = await this.loader.loadAsync("https://raw.githubusercontent.com/ProgMEM-CC/miniblox.impact.client.updatedv2/refs/heads/main/favicon.png");
 		}
 		async loadSpritesheet(){
 	`, true);
@@ -1077,7 +1077,7 @@ clientVersion: VERSION$1
 			case ".report": {
 				if (typeof globalThis.${storeName} === "undefined") globalThis.${storeName} = {};
 				globalThis.${storeName}.openReportModal = function() {
-					const GITHUB_REPO = "progmem-cc/miniblox.Balance.client.updatedv2";
+					const GITHUB_REPO = "progmem-cc/miniblox.impact.client.updatedv2";
 					
 					// Exit pointer lock when opening modal
 					if (document.pointerLockElement) {
@@ -1275,7 +1275,7 @@ clientVersion: VERSION$1
 						const versionInfo = \`\\n\\n---\\n**Version:** \${VERSION}\\n**User Agent:** \${navigator.userAgent}\`;
 						const fullBody = body + versionInfo;
 						
-						const url = \`https://github.com/ProgMEM-CC/miniblox.Balance.client.updatedv2/issues/new?labels=\${label}&title=\${encodeURIComponent(fullTitle)}&body=\${encodeURIComponent(fullBody)}\`;
+						const url = \`https://github.com/ProgMEM-CC/miniblox.impact.client.updatedv2/issues/new?labels=\${label}&title=\${encodeURIComponent(fullTitle)}&body=\${encodeURIComponent(fullBody)}\`;
 						
 						window.open(url, "_blank");
 						modal.remove();
@@ -1734,7 +1734,7 @@ clientVersion: VERSION$1
 			// "Balance:client", however, isn't protected,
 			// since this is a public client and
 			// we have no way of being able to trust the client without this e.g. being possible to emulate the client.
-			const PID_REG = "https://raw.githubusercontent.com/Balance-IMChat/platform-id-registry/refs/heads/main/registry.json";
+			const PID_REG = "https://raw.githubusercontent.com/impact-IMChat/platform-id-registry/refs/heads/main/registry.json";
 			const PLATFORM_ID_TO_READABLE = await fetch(PID_REG).then(r => r.json());
 			/** @param {MessageEvent} e */
 			function onIRCMessage(e) {
@@ -2471,7 +2471,7 @@ speedauto = speed.addoption("AutoJump", Boolean, true);
 								height: 47,
 								elements: [
 									// Logo
-									{ type: "image", src: "https://github.com/ProgMEM-CC/miniblox.Balance.client.updatedv2/blob/main/logo.png?raw=true", x: logoX, y: 0, width: 22, height: 22 },
+									{ type: "image", src: "https://github.com/ProgMEM-CC/miniblox.impact.client.updatedv2/blob/main/logo.png?raw=true", x: logoX, y: 0, width: 22, height: 22 },
 									// Balance V6
 									{ type: "text", content: "Balance V6", x: 0, y: 0, color: "#fff", size: 13, bold: true },
 									{ type: "text", content: fpsLbl, x: perfX, y: -4, color: "#0FB3A0", size: 18 },
@@ -2494,7 +2494,7 @@ speedauto = speed.addoption("AutoJump", Boolean, true);
 								height: 32,
 								elements: [
 									// Logo
-									{ type: "image", src: "https://github.com/ProgMEM-CC/miniblox.Balance.client.updatedv2/blob/main/logo.png?raw=true", x: logoX, y: 0, width: 22, height: 22 },
+									{ type: "image", src: "https://github.com/ProgMEM-CC/miniblox.impact.client.updatedv2/blob/main/logo.png?raw=true", x: logoX, y: 0, width: 22, height: 22 },
 									{ type: "text", content: "Balance V6", x: 0, y: 0, color: "#fff", size: 13, bold: true },
 									{ type: "text", content: timeStr, x: timeX, y: 0, color: "#ffd700", size: 11, bold: true }
 								]
