@@ -4,8 +4,8 @@
 let replacements = {};
 let dumpedVarNames = {};
 const storeName = "a" + crypto.randomUUID().replaceAll("-", "").substring(16);
-const vapeName = crypto.randomUUID().replaceAll("-", "").substring(16);
-const VERSION = "3.1.2.1";
+const BalanceName = crypto.randomUUID().replaceAll("-", "").substring(16);
+const VERSION = "1";
 
 // ANTICHEAT HOOK
 function replaceAndCopyFunction(oldFunc, newFunc) {
@@ -237,12 +237,12 @@ let serverPos = player.pos.clone();
 		});
 	`);
 
-	addModification('VERSION$1," | ",', `"${vapeName} v${VERSION}"," | ",`);
-	addModification('if(!x.canConnect){', 'x.errorMessage = x.errorMessage === "Could not join server. You are connected to a VPN or proxy. Please disconnect from it and refresh the page." ? "[Vape] You\'re IP banned (these probably don\'t exist now anyways)" : x.errorMessage;');
+	addModification('VERSION$1," | ",', `"${BalanceName} v${VERSION}"," | ",`);
+	addModification('if(!x.canConnect){', 'x.errorMessage = x.errorMessage === "Could not join server. You are connected to a VPN or proxy. Please disconnect from it and refresh the page." ? "[Balance] You\'re IP banned (these probably don\'t exist now anyways)" : x.errorMessage;');
 
 	// DRAWING SETUP
 	addModification('I(this,"glintTexture");', `
-		I(this, "vapeTexture");
+		I(this, "BalanceTexture");
 		I(this, "v4Texture");
 	`);
 	/**
@@ -252,11 +252,11 @@ let serverPos = player.pos.clone();
 	const corsMoment = url => {
 		return new URL(`https://corsproxy.io/?url=${url}`).href;
 	}
-	addModification('skinManager.loadTextures(),', ',this.loadVape(),');
+	addModification('skinManager.loadTextures(),', ',this.loadBalance(),');
 	addModification('async loadSpritesheet(){', `
-		async loadVape() {
-			this.vapeTexture = await this.loader.loadAsync("${corsMoment("https://codeberg.org/RealPacket/VapeForMiniblox/raw/branch/main/assets/logo.png")}");
-			this.v4Texture = await this.loader.loadAsync("${corsMoment("https://codeberg.org/RealPacket/VapeForMiniblox/raw/branch/main/assets/logov4.png")}");
+		async loadBalance() {
+			this.BalanceTexture = await this.loader.loadAsync("${corsMoment("https://codeberg.org/RealPacket/BalanceForMiniblox/raw/branch/main/assets/logo.png")}");
+			this.v4Texture = await this.loader.loadAsync("${corsMoment("https://codeberg.org/RealPacket/BalanceForMiniblox/raw/branch/main/assets/logov4.png")}");
 		}
 		async loadSpritesheet(){
 	`, true);
@@ -306,7 +306,7 @@ let serverPos = player.pos.clone();
 			const posY = 17;
 			ctx$5.imageSmoothingEnabled = true;
 			ctx$5.imageSmoothingQuality = "high";
-			drawImage(ctx$5, textureManager.vapeTexture.image, posX, posY, 80, 21, \`HSL(\${(colorOffset % 1) * 360}, 100%, 50%)\`);
+			drawImage(ctx$5, textureManager.BalanceTexture.image, posX, posY, 80, 21, \`HSL(\${(colorOffset % 1) * 360}, 100%, 50%)\`);
 			drawImage(ctx$5, textureManager.v4Texture.image, posX + 81, posY + 1, 33, 18);
 
 			let offset = 0;
@@ -603,7 +603,7 @@ h.addVelocity(-Math.sin(this.yaw) * g * .5, .1, -Math.cos(this.yaw) * g * .5);
 		if (u == "GrandDad") {
 			const $ = skins[u];
 			return new Promise((et, tt) => {
-				textureManager.loader.load("${corsMoment("https://codeberg.org/RealPacket/VapeForMiniblox/raw/branch/main/assets/skin.png")}", rt => {
+				textureManager.loader.load("${corsMoment("https://codeberg.org/RealPacket/BalanceForMiniblox/raw/branch/main/assets/skin.png")}", rt => {
 					const nt = {
 						atlas: rt,
 						id: u,
@@ -621,7 +621,7 @@ h.addVelocity(-Math.sin(this.yaw) * g * .5, .1, -Math.cos(this.yaw) * g * .5);
 		if (u == "GrandDad") {
 			const $ = capes[u];
 			return new Promise((et, tt) => {
-				textureManager.loader.load("${corsMoment("https://codeberg.org/RealPacket/VapeForMiniblox/raw/branch/main/assets/cape.png")}", rt => {
+				textureManager.loader.load("${corsMoment("https://codeberg.org/RealPacket/BalanceForMiniblox/raw/branch/main/assets/cape.png")}", rt => {
 					const nt = {
 						atlas: rt,
 						id: u,
@@ -757,20 +757,20 @@ h.addVelocity(-Math.sin(this.yaw) * g * .5, .1, -Math.cos(this.yaw) * g * .5);
 				if (args.length > 1) {
 					switch (args[1]) {
 						case "save":
-							globalThis.${storeName}.saveVapeConfig(args[2]);
+							globalThis.${storeName}.saveBalanceConfig(args[2]);
 							game.chat.addChat({text: "Saved config " + args[2]});
 							break;
 						case "load":
-							globalThis.${storeName}.saveVapeConfig();
-							globalThis.${storeName}.loadVapeConfig(args[2]);
+							globalThis.${storeName}.saveBalanceConfig();
+							globalThis.${storeName}.loadBalanceConfig(args[2]);
 							game.chat.addChat({text: "Loaded config " + args[2]});
 							break;
 						case "import":
-							globalThis.${storeName}.importVapeConfig(args[2]);
+							globalThis.${storeName}.importBalanceConfig(args[2]);
 							game.chat.addChat({text: "Imported config"});
 							break;
 						case "export":
-							globalThis.${storeName}.exportVapeConfig();
+							globalThis.${storeName}.exportBalanceConfig();
 							game.chat.addChat({text: "Config set to clipboard!"});
 							break;
 					}
@@ -1811,7 +1811,7 @@ Classic PvP, and OITQ use the new ac, everything else is using the old ac)\`});
 			new Module("AutoQueue", function() {}, "Minigames");
 			new Module("AutoVote", function() {}, "Minigames");
 			const chatdisabler = new Module("ChatDisabler", function() {}, "Misc", () => "Spam");
-			chatdisablermsg = chatdisabler.addoption("Message", String, "youtube.com/c/7GrandDadVape");
+			chatdisablermsg = chatdisabler.addoption("Message", String, "youtube.com/c/7GrandDadBalance");
 			new Module("FilterBypass", function() {}, "Exploit", () => "\\\\");
 
 			const survival = new Module("SurvivalMode", function(callback) {
@@ -1826,7 +1826,7 @@ Classic PvP, and OITQ use the new ac, everything else is using the old ac)\`});
 		})();
 	`);
 
-	async function saveVapeConfig(profile) {
+	async function saveBalanceConfig(profile) {
 		if (!loadedConfig) return;
 		let saveList = {};
 		for (const [name, module] of Object.entries(unsafeWindow.globalThis[storeName].modules)) {
@@ -1835,15 +1835,15 @@ Classic PvP, and OITQ use the new ac, everything else is using the old ac)\`});
 				saveList[name].options[option] = setting[1];
 			}
 		}
-		GM_setValue("vapeConfig" + (profile ?? unsafeWindow.globalThis[storeName].profile), JSON.stringify(saveList));
-		GM_setValue("mainVapeConfig", JSON.stringify({ profile: unsafeWindow.globalThis[storeName].profile }));
+		GM_setValue("BalanceConfig" + (profile ?? unsafeWindow.globalThis[storeName].profile), JSON.stringify(saveList));
+		GM_setValue("mainBalanceConfig", JSON.stringify({ profile: unsafeWindow.globalThis[storeName].profile }));
 	};
 
-	async function loadVapeConfig(switched) {
+	async function loadBalanceConfig(switched) {
 		loadedConfig = false;
-		const loadedMain = JSON.parse(await GM_getValue("mainVapeConfig", "{}")) ?? { profile: "default" };
+		const loadedMain = JSON.parse(await GM_getValue("mainBalanceConfig", "{}")) ?? { profile: "default" };
 		unsafeWindow.globalThis[storeName].profile = switched ?? loadedMain.profile;
-		const loaded = JSON.parse(await GM_getValue("vapeConfig" + unsafeWindow.globalThis[storeName].profile, "{}"));
+		const loaded = JSON.parse(await GM_getValue("BalanceConfig" + unsafeWindow.globalThis[storeName].profile, "{}"));
 		if (!loaded) {
 			loadedConfig = true;
 			return;
@@ -1865,15 +1865,15 @@ Classic PvP, and OITQ use the new ac, everything else is using the old ac)\`});
 		loadedConfig = true;
 	};
 
-	async function exportVapeConfig() {
-		navigator.clipboard.writeText(await GM_getValue("vapeConfig" + unsafeWindow.globalThis[storeName].profile, "{}"));
+	async function exportBalanceConfig() {
+		navigator.clipboard.writeText(await GM_getValue("BalanceConfig" + unsafeWindow.globalThis[storeName].profile, "{}"));
 	};
 
-	async function importVapeConfig() {
+	async function importBalanceConfig() {
 		const arg = await navigator.clipboard.readText();
 		if (!arg) return;
-		GM_setValue("vapeConfig" + unsafeWindow.globalThis[storeName].profile, arg);
-		loadVapeConfig();
+		GM_setValue("BalanceConfig" + unsafeWindow.globalThis[storeName].profile, arg);
+		loadBalanceConfig();
 	};
 
 	let loadedConfig = false;
@@ -1890,13 +1890,13 @@ Classic PvP, and OITQ use the new ac, everything else is using the old ac)\`});
 				}
 			}, 10);
 		});
-		unsafeWindow.globalThis[storeName].saveVapeConfig = saveVapeConfig;
-		unsafeWindow.globalThis[storeName].loadVapeConfig = loadVapeConfig;
-		unsafeWindow.globalThis[storeName].exportVapeConfig = exportVapeConfig;
-		unsafeWindow.globalThis[storeName].importVapeConfig = importVapeConfig;
-		loadVapeConfig();
+		unsafeWindow.globalThis[storeName].saveBalanceConfig = saveBalanceConfig;
+		unsafeWindow.globalThis[storeName].loadBalanceConfig = loadBalanceConfig;
+		unsafeWindow.globalThis[storeName].exportBalanceConfig = exportBalanceConfig;
+		unsafeWindow.globalThis[storeName].importBalanceConfig = importBalanceConfig;
+		loadBalanceConfig();
 		setInterval(async function () {
-			saveVapeConfig();
+			saveBalanceConfig();
 		}, 10000);
 	}
 
